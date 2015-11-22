@@ -9,6 +9,61 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_main" tools:context=".MainActivity">
 
-    <TextView android:text="Hello World!" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_Name"
+            android:layout_marginTop="96dp"
+            android:text="Shy Boys"
+            android:textSize="50dp"
+            android:background="@drawable/round"
+            android:textColor="#ffffff"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="진행하기"
+            android:id="@+id/main_Start"
+            android:layout_below="@+id/main_Name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="112dp"
+            android:layout_gravity="center_horizontal"
+            android:autoText="false"
+            android:textColor="#ffffff"
+            android:textSize="30dp"
+            android:background="@drawable/round"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참여하기"
+            android:id="@+id/main_Join"
+            android:layout_below="@+id/main_Start"
+            android:layout_alignStart="@+id/main_Start"
+            android:layout_marginTop="25dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30dp"
+            android:textColor="#ffffff"
+            android:background="@drawable/round"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+    </LinearLayout>
 </RelativeLayout>
