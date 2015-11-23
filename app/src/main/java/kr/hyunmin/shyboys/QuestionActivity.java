@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class QuestionActivity extends AppCompatActivity {
+
+    Button insert_q_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,7 @@ public class QuestionActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Actionbar 설정
         ActionBar actionBar = getSupportActionBar();
 
         actionBar.setDisplayShowHomeEnabled(false);
@@ -34,6 +38,13 @@ public class QuestionActivity extends AppCompatActivity {
         actionBar.setCustomView(q_Customview);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFFBDD7EE));
+
+        //여기까지
+
+        insert_q_button = (Button) findViewById(R.id.insert_q_button);
+        //insert_q_button.setVisibility(View.INVISIBLE);
+        
+
     }
 
 }

@@ -16,7 +16,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFBDD7EE">
+            android:background="#FFBDD7EE"
+            android:id="@+id/linearLayout">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,10 +33,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="글쓰기"
-                android:id="@+id/button"
+                android:id="@+id/insert_q_button"
+                android:background="@drawable/button_gray"
                 android:layout_weight="0.1"
                 android:textColor="#ffffff"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:layout_margin="3dp" />
         </LinearLayout>
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_below="@+id/linearLayout" />
     </RelativeLayout>
 </RelativeLayout>
