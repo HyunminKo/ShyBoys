@@ -23,6 +23,7 @@
             android:label="@string/title_activity_question"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
         <activity
             android:name=".RoomListActivity"
             android:label="@string/title_activity_room_list"
