@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         join_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(MainActivity.this,QuestionActivity.class);
+                Intent intent1 = new Intent(MainActivity.this,SelectQnAActivity.class);
                 startActivity(intent1);
             }
         });

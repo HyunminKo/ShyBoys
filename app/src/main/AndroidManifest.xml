@@ -23,7 +23,7 @@
             android:label="@string/title_activity_question"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-<<<<<<< HEAD
+
         <activity
             android:name=".RoomListActivity"
             android:label="@string/title_activity_room_list"
@@ -33,9 +33,9 @@
             android:name=".AnswerActivity"
             android:label="@string/title_activity_answer"
             android:theme="@style/AppTheme.NoActionBar" >
-=======
+        </activity>
         <activity android:name=".SelectQnAActivity" >
->>>>>>> 60f2e6eeb60a706c45d2a5b45dca765cb5f3010b
+
         </activity>
     </application>
 
