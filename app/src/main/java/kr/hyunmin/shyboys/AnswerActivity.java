@@ -14,14 +14,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class QuestionActivity extends AppCompatActivity {
+public class AnswerActivity extends AppCompatActivity {
 
-    Button insert_q_button;
+    Button insert_a_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_answer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -43,16 +43,15 @@ public class QuestionActivity extends AppCompatActivity {
 
         //여기까지
 
-        insert_q_button = (Button) findViewById(R.id.insert_q_button);
-        //insert_q_button.setVisibility(View.INVISIBLE);
-        insert_q_button.setOnClickListener(new View.OnClickListener() {
+        insert_a_button = (Button) findViewById(R.id.insert_a_button);
+        //insert_a_button.setVisibility(View.INVISIBLE);
+        insert_a_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(QuestionActivity.this,AnswerActivity.class);
+                Intent intent1 = new Intent(AnswerActivity.this,RoomListActivity.class);
                 startActivity(intent1);
             }
         });
-
     }
 
 }

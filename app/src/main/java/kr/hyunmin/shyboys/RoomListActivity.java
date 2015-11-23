@@ -10,18 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class QuestionActivity extends AppCompatActivity {
-
-    Button insert_q_button;
+public class RoomListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_room_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -31,27 +29,27 @@ public class QuestionActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
 
-        LayoutInflater q_Inflater = LayoutInflater.from(this);
+        LayoutInflater r_Inflater = LayoutInflater.from(this);
 
-        View q_Customview = q_Inflater.inflate(R.layout.custom_actionbar, null);
-        TextView q_TitleTextView = (TextView)q_Customview.findViewById(R.id.subject_textview);
-        q_TitleTextView.setText("객체지향설계");
+        View r_Customview = r_Inflater.inflate(R.layout.custom2_actionbar, null);
+        TextView r_TitleTextView = (TextView)r_Customview.findViewById(R.id.ShyBoys_textview);
+        r_TitleTextView.setText("ShyBoys");
 
-        actionBar.setCustomView(q_Customview);
+        ImageButton imageButton = (ImageButton) r_Customview.findViewById(R.id.plus_button);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getApplicationContext(), "Clicked!",
+                            Toast.LENGTH_LONG).show();
+                }
+        });
+
+        actionBar.setCustomView(r_Customview);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setBackgroundDrawable(new ColorDrawable(0xFFBDD7EE));
 
         //여기까지
-
-        insert_q_button = (Button) findViewById(R.id.insert_q_button);
-        //insert_q_button.setVisibility(View.INVISIBLE);
-        insert_q_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(QuestionActivity.this,AnswerActivity.class);
-                startActivity(intent1);
-            }
-        });
 
     }
 
