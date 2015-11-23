@@ -4,9 +4,7 @@ package kr.hyunmin.shyboys;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,14 +12,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Button start_button;
     Button join_Button;
-
+    static int isHost=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         join_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isHost=0;
                 Intent intent1 = new Intent(MainActivity.this,QuestionActivity.class);
                 startActivity(intent1);
             }
@@ -39,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isHost=1;
                 showLoginPopup();
             }
         });
@@ -104,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         View layout = inflater.inflate(R.layout.joinpopup,(ViewGroup) findViewById(R.id.login_popup));
         final android.app.AlertDialog.Builder aDialog = new android.app.AlertDialog.Builder(MainActivity.this);
 
-        aDialog.setTitle("Login"); //타이틀바 제목
+        aDialog.setTitle("Join"); //타이틀바 제목
         aDialog.setView(layout); //inti.xml 파일을 뷰로 셋팅
         aDialog.setCancelable(true);
         //그냥 닫기버튼을 위한 부분

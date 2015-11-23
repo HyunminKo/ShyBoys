@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/join_popup"
+    android:id="@+id/u_room_popup"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#ffffff"
@@ -16,8 +16,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ID"
-            android:id="@+id/ID_Text"
+            android:text="Room Code"
+            android:id="@+id/u_rc_Text"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textSize="20dp"
@@ -26,14 +26,14 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Join_id_edittext"
+            android:id="@+id/u_Roomcode_edittext"
             android:textColor="#000000" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="PW"
-            android:id="@+id/PW_Text"
+            android:text="Name"
+            android:id="@+id/u_name_Text"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
             android:gravity="center"
@@ -42,9 +42,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/Join_pw_edittext"
+            android:id="@+id/u_Name_edittext"
             android:textColor="#000000"
             android:layout_marginBottom="20dp" />
 
