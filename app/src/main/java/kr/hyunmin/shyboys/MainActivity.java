@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isHost=0;
-                Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
+                Intent intent1 = new Intent(MainActivity.this,QuestionActivity.class);
                 startActivity(intent1);
             }
         });

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class RoomListActivity extends AppCompatActivity {
+public class RoomListActivity extends Actionbar {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +22,7 @@ public class RoomListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Actionbar 설정
-        ActionBar actionBar = getSupportActionBar();
-
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(false);
-
-        LayoutInflater r_Inflater = LayoutInflater.from(this);
-
-        View r_Customview = r_Inflater.inflate(R.layout.custom2_actionbar, null);
-        TextView r_TitleTextView = (TextView)r_Customview.findViewById(R.id.ShyBoys_textview);
-        r_TitleTextView.setText("ShyBoys");
+        setActionbar_Title();
 
         ImageButton imageButton = (ImageButton) r_Customview.findViewById(R.id.plus_button);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -44,12 +34,6 @@ public class RoomListActivity extends AppCompatActivity {
                     showUserRoomPopup();
                 }
         });
-
-        actionBar.setCustomView(r_Customview);
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setBackgroundDrawable(new ColorDrawable(0xFFBDD7EE));
-
-        //여기까지
 
     }
     public void showHostRoomPopup(){
