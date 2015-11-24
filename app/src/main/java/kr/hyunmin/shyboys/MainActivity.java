@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
+                Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
+                startActivity(intent1);
             }
         });
         //팝업창 생성
@@ -112,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
         });
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-
+                Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
+                startActivity(intent1);
             }
         });
         //팝업창 생성
