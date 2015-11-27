@@ -1,14 +1,13 @@
 package kr.hyunmin.shyboys.kr.hyunmin.object;
 
 /**
- * Created by Administrator on 2015-11-24.
+ * Created by Ko on 2015-11-24.
  */
 public class DTO {
     private String _ID;
     private String _PW;
     private String _room_code;
-    private int _QorA;
-    private int _QnA;
+    private String _QorA;
     private String _content;
     private String _date;
 
@@ -36,20 +35,12 @@ public class DTO {
         this._room_code = _room_code;
     }
 
-    public int get_QorA() {
+    public String get_QorA() {
         return _QorA;
     }
 
-    public void set_QorA(int _QorA) {
+    public void set_QorA(String _QorA) {
         this._QorA = _QorA;
-    }
-
-    public int get_QnA() {
-        return _QnA;
-    }
-
-    public void set_QnA(int _QnA) {
-        this._QnA = _QnA;
     }
 
     public String get_content() {

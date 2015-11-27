@@ -2,19 +2,19 @@ package kr.hyunmin.shyboys;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class RoomListActivity extends Actionbar {
-
+    EditText h_roomcode;
+    EditText subject;
+    EditText h_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +45,11 @@ public class RoomListActivity extends Actionbar {
         final android.app.AlertDialog.Builder aDialog = new android.app.AlertDialog.Builder(RoomListActivity.this);
 
         aDialog.setTitle("Create Room"); //타이틀바 제목
-        aDialog.setView(layout); //inti.xml 파일을 뷰로 셋팅
+        aDialog.setView(layout); //host_roompopup.xml 파일을 뷰로 셋팅
         aDialog.setCancelable(true);
+        h_roomcode = (EditText) layout.findViewById(R.id.h_Roomcode_edittext);
+        subject = (EditText) layout.findViewById(R.id.Subject_edittext);
+        h_name = (EditText) layout.findViewById(R.id.h_Name_edittext);
         //그냥 닫기버튼을 위한 부분
         aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -55,6 +58,9 @@ public class RoomListActivity extends Actionbar {
         });
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                Log.d("checkValue",h_roomcode.getText().toString());
+                Log.d("checkValue",subject.getText().toString());
+                Log.d("checkValue",h_name.getText().toString());
 
             }
         });
