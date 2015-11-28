@@ -2,16 +2,20 @@ package kr.hyunmin.shyboys;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import kr.hyunmin.shyboys.kr.hyunmin.object.DAO;
+import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 
 public class QuestionActivity extends Actionbar {
-
+    EditText question_content;
     Button insert_q_button;
 
        @Override
@@ -30,8 +34,6 @@ public class QuestionActivity extends Actionbar {
             @Override
             public void onClick(View view) {
                 showQuestion_writePopup();
-                Intent intent1 = new Intent(QuestionActivity.this,AnswerActivity.class);
-                startActivity(intent1);
             }
         });
 
@@ -48,6 +50,8 @@ public class QuestionActivity extends Actionbar {
         aDialog.setTitle("Write Question"); //타이틀바 제목
         aDialog.setView(layout); //inti.xml 파일을 뷰로 셋팅
         aDialog.setCancelable(true);
+
+        question_content = (EditText) layout.findViewById(R.id.Question_edittext);
         //그냥 닫기버튼을 위한 부분
         aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -56,6 +60,18 @@ public class QuestionActivity extends Actionbar {
         });
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                String content = question_content.getText().toString();
+                DAO dao = new DAO();
+                DTO dto = new DTO();
+
+                dto.set_content(content);
+                dto.set_room_code("Room123");
+                dto.set_QorA("Q");
+                dto.set_date("2015/11/27");
+                if(dao.addDB(dto)){
+                    Log.d("checkValue","성공");
+                }else
+                    Log.d("checkValue","실패");
 
             }
         });
