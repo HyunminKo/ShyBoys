@@ -34,6 +34,7 @@ public class RoomListActivity extends Actionbar {
     Cursor u_cursor;
     SQLiteDatabase user_DB;
     String u_DBname = "In_USER.db";
+    String u_subject = null;
 
     String tablename = "ROOM";
     ArrayList<String> rooms;
@@ -50,7 +51,20 @@ public class RoomListActivity extends Actionbar {
         setSupportActionBar(toolbar);
         setActionbar_Title();
         rooms = new ArrayList<String>();
-        room_list = (ListView)findViewById(R.id.listView2);;
+        room_list = (ListView)findViewById(R.id.listView2);
+
+         /*if(MainActivity.isHost==1){
+            h_cursor = host_DB.rawQuery("SELECT * FROM ROOM", null);
+            h_cursor.moveToFirst();
+            while (!h_cursor.isAfterLast()) {
+                rooms.add(h_cursor.getString(0));
+                Log.d("rooms배열값 : ", rooms.toString());
+                h_cursor.moveToNext();
+            }
+            adapter.notifyDataSetChanged();
+            h_cursor.close();
+        }*/
+
         ImageButton imageButton = (ImageButton) r_Customview.findViewById(R.id.plus_button);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +105,11 @@ public class RoomListActivity extends Actionbar {
             user_DB = context.openOrCreateDatabase(u_DBname, Context.MODE_PRIVATE, null);
             user_DB.execSQL("CREATE TABLE if not exists " + tablename + "("
                     + "u_roomcode"
-                    + "," + " u_name" + ")");
+                    + "," + " u_subject"
+                    + "," + " u_name"
+                    + "," + " QorA"
+                    + "," + " in_content"
+                    + "," + " in_date" + ")");
             Log.d("checkUserFLAG", "DB생성완료");
         }
 
@@ -168,18 +186,28 @@ public class RoomListActivity extends Actionbar {
                 Log.d("checkValue", u_roomcode.getText().toString());
                 Log.d("checkValue", u_name.getText().toString());
 
-                user_DB.execSQL("INSERT INTO " + tablename + "(u_roomcode, u_name) VALUES"
-                        + "('" + u_roomcode.getText().toString()
-                        + "','" + u_name.getText().toString() + "')");
+                /*
+                if(u_roomcode.getText().toString().equals("abc012")) {//룸코드 비교후
+                    //해당하는 과목 불러오기
+                    u_subject = null;
+                }
+                */
 
+                user_DB.execSQL("INSERT INTO " + tablename + "(u_roomcode, u_subject, u_name, QorA, in_content, in_date) VALUES"
+                        + "('" + u_roomcode.getText().toString()
+                        + "','" + null
+                        + "','" + u_name.getText().toString()
+                        + "','" + null
+                        + "','" + null
+                        + "','" + null + "')");
+
+                u_cursor = null;
                 u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
-                u_cursor.moveToFirst();
-                while (!u_cursor.isAfterLast()) {
+
+                while (u_cursor.moveToNext()) {
                     rooms.add(u_cursor.getString(0));
                     Log.d("rooms배열값 : ", rooms.toString());
-                    u_cursor.moveToNext();
                 }
-                adapter.notifyDataSetChanged();
                 u_cursor.close();
             }
         });
