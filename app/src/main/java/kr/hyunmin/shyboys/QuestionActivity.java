@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
@@ -25,6 +27,7 @@ public class QuestionActivity extends Actionbar {
     ArrayAdapter adapter_question;
     String subject;
     String roomcode;
+    Vector<String> question;
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,7 @@ public class QuestionActivity extends Actionbar {
         setContentView(R.layout.activity_question);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+           question = new Vector();
            Intent intent = getIntent();
            subject = intent.getExtras().getString("subject");
            roomcode = intent.getExtras().getString("roomcode");
@@ -45,12 +48,13 @@ public class QuestionActivity extends Actionbar {
             @Override
             public void onClick(View view) {
                 showQuestion_writePopup();
+
             }
         });
            question_listView = (ListView) findViewById(R.id.question_listView);
            String[] result_array = (String[]) intent.getSerializableExtra("result");
 
-           Vector<String> question = new Vector();
+
            for(int i=0;i<result_array.length;i++){
                if(result_array[i]!=null){
                        question.add((String)result_array[i]);
@@ -89,17 +93,21 @@ public class QuestionActivity extends Actionbar {
                 DAO dao = new DAO(QuestionActivity.this);
                 DTO dto = new DTO();
 
-                dto.set_content(content);
+                Date d = new Date();
+                SimpleDateFormat now_date = new SimpleDateFormat("yyyy-MM-dd");
+                dto.set_content(content +"\n"+now_date.format(d));
                 dto.set_room_code(roomcode);
                 dto.set_QorA("Q");
-                dto.set_date("11/30");
+                dto.set_date(now_date+"");
                 dao.insert_QuestionAndAnswer(dto);
-
+                question.add(content +"\n"+now_date.format(d));
+                adapter_question.notifyDataSetChanged();
             }
         });
         //팝업창 생성
         android.app.AlertDialog ad = aDialog.create();
         ad.show();//보여줌!
+
     }
 
 }

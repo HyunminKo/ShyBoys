@@ -57,7 +57,6 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
         rooms = new ArrayList<String>();
         roomcode = new ArrayList<String>();
         room_list = (ListView)findViewById(R.id.listView2);
-        room_list = (ListView) findViewById(R.id.listView2);
 
         if (MainActivity.isHost == 1) {
             Create_DB(1); //host db 생성
@@ -96,13 +95,6 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
             public void onClick(View view) {
                 if (MainActivity.isHost == 1) {
                     showHostRoomPopup();
-
-                    Log.d("checkFLG", "DB 데이터 삽입");
-                    adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
-                    adapter.notifyDataSetChanged();
-                    room_list.setAdapter(adapter);
-
-
                 } else {
                     showUserRoomPopup();
                 }
@@ -173,19 +165,10 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                         + "','" + subject.getText().toString()
                         + "','" + h_name.getText().toString() + "')");
 
-                h_cursor = host_DB.rawQuery("SELECT * FROM ROOM", null);
-                h_cursor.moveToFirst();
-                while (!h_cursor.isAfterLast()) {
-                    roomcode.add(h_cursor.getString(0));
-                    rooms.add(h_cursor.getString(1));
+                    roomcode.add(h_roomcode.getText().toString());
+                    rooms.add(subject.getText().toString());
 
-                    rooms.add(h_cursor.getString(0));
-                    h_cursor.moveToNext();
-                }
-                h_cursor.close();
-                adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
                 adapter.notifyDataSetChanged();
-                room_list.setAdapter(adapter);
             }
         });
         //팝업창 생성
@@ -205,6 +188,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
         aDialog.setView(layout); //inti.xml 파일을 뷰로 셋팅
         aDialog.setCancelable(true);
         u_roomcode = (EditText) layout.findViewById(R.id.u_Roomcode_edittext);
+        subject = (EditText) layout.findViewById(R.id.Subject_edittext);
         u_name = (EditText) layout.findViewById(R.id.u_Name_edittext);
         //그냥 닫기버튼을 위한 부분
         aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
@@ -219,24 +203,15 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
 
                 user_DB.execSQL("INSERT INTO " + tablename + "(u_roomcode, u_subject, u_name, QorA, in_content, in_date) VALUES"
                         + "('" + u_roomcode.getText().toString()
-                        + "','" + null
+                        + "','" + subject.getText().toString()
                         + "','" + u_name.getText().toString()
                         + "','" + null
                         + "','" + null
                         + "','" + null + "')");
 
-                u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
-                u_cursor.moveToFirst();
-                while (!u_cursor.isAfterLast()) {
-                    roomcode.add(u_cursor.getString(0));
-                    rooms.add(u_cursor.getString(1));
-                    rooms.add(u_cursor.getString(0));
-                    u_cursor.moveToNext();
-                }
-                u_cursor.close();
-                adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
+                    roomcode.add(u_roomcode.getText().toString());
+                    rooms.add(subject.getText().toString());
                 adapter.notifyDataSetChanged();
-                room_list.setAdapter(adapter);
             }
         });
         //팝업창 생성
@@ -248,7 +223,6 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         String c_list = rooms.get(i);
         String b_list = roomcode.get(i);
-
         Intent intent = new Intent(RoomListActivity.this,SelectQnAActivity.class);
         intent.putExtra("roomcode",b_list);
         intent.putExtra("subject",c_list);

@@ -359,6 +359,7 @@ public class DAO extends AppCompatActivity {
         task.execute(id,pw);
     }
     public void insert_QuestionAndAnswer(DTO dto){
+
         String roomcode = dto.get_room_code();
         String content = dto.get_content();
         String QorA = dto.get_QorA();

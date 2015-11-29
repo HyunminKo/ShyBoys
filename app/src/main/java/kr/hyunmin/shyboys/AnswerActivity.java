@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
@@ -25,6 +27,7 @@ public class AnswerActivity extends Actionbar {
     ArrayAdapter adapter_answer;
     String subject;
     String roomcode;
+    Vector<String> Answer;
 
 
 
@@ -52,7 +55,7 @@ public class AnswerActivity extends Actionbar {
          answer_listView = (ListView) findViewById(R.id.answer_listView);
         String[] result_array = (String[]) intent.getSerializableExtra("result");
 
-        Vector<String> Answer = new Vector();
+        Answer = new Vector();
         for(int i=0;i<result_array.length;i++){
             if(result_array[i]!=null){
                 Answer.add((String) result_array[i]);
@@ -88,12 +91,15 @@ public class AnswerActivity extends Actionbar {
                 DAO dao = new DAO(AnswerActivity.this);
                 DTO dto = new DTO();
 
-                dto.set_content(content);
+                Date d = new Date();
+                SimpleDateFormat now_date = new SimpleDateFormat("yyyy-MM-dd");
+                dto.set_content(content+"\n"+now_date.format(d));
                 dto.set_room_code(roomcode);
                 dto.set_QorA("A");
-                dto.set_date("11/30");
+                dto.set_date(now_date+"");
                 dao.insert_QuestionAndAnswer(dto);
-
+                Answer.add(content +"\n"+now_date.format(d));
+                adapter_answer.notifyDataSetChanged();
             }
         });
         //팝업창 생성
