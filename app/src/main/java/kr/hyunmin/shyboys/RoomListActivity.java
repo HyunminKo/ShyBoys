@@ -1,6 +1,5 @@
 package kr.hyunmin.shyboys;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,18 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -60,12 +55,9 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
         setSupportActionBar(toolbar);
         setActionbar_Title();
         rooms = new ArrayList<String>();
-<<<<<<< HEAD
         roomcode = new ArrayList<String>();
         room_list = (ListView)findViewById(R.id.listView2);
-=======
         room_list = (ListView) findViewById(R.id.listView2);
->>>>>>> 19721bfb9d716692a049aaae79b3ab11509e6599
 
         if (MainActivity.isHost == 1) {
             Create_DB(1); //host db 생성
@@ -184,12 +176,10 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 h_cursor = host_DB.rawQuery("SELECT * FROM ROOM", null);
                 h_cursor.moveToFirst();
                 while (!h_cursor.isAfterLast()) {
-<<<<<<< HEAD
                     roomcode.add(h_cursor.getString(0));
                     rooms.add(h_cursor.getString(1));
-=======
+
                     rooms.add(h_cursor.getString(0));
->>>>>>> 19721bfb9d716692a049aaae79b3ab11509e6599
                     h_cursor.moveToNext();
                 }
                 h_cursor.close();
@@ -238,12 +228,9 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
                 u_cursor.moveToFirst();
                 while (!u_cursor.isAfterLast()) {
-<<<<<<< HEAD
                     roomcode.add(u_cursor.getString(0));
                     rooms.add(u_cursor.getString(1));
-=======
                     rooms.add(u_cursor.getString(0));
->>>>>>> 19721bfb9d716692a049aaae79b3ab11509e6599
                     u_cursor.moveToNext();
                 }
                 u_cursor.close();
@@ -260,16 +247,11 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         String c_list = rooms.get(i);
-<<<<<<< HEAD
         String b_list = roomcode.get(i);
 
         Intent intent = new Intent(RoomListActivity.this,SelectQnAActivity.class);
         intent.putExtra("roomcode",b_list);
         intent.putExtra("subject",c_list);
-=======
-        Intent intent = new Intent(RoomListActivity.this, SelectQnAActivity.class);
-        intent.putExtra("arr_text", c_list);
->>>>>>> 19721bfb9d716692a049aaae79b3ab11509e6599
         startActivity(intent);
     }
 
