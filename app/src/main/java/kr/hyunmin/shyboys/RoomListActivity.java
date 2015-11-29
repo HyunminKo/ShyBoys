@@ -77,7 +77,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                     Log.d("checkFLG", "DB생성 완료2");
                     showHostRoomPopup();
                     Log.d("checkFLG", "DB 데이터 삽입");
-                    adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, rooms);
+                    adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font , rooms);
                     adapter.notifyDataSetChanged();
                     room_list.setAdapter(adapter);
                 } else {
@@ -85,7 +85,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                     Create_DB(0);
                     showUserRoomPopup();
                     Log.d("checkFLG", "DB 데이터 삽입");
-                    adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, rooms);
+                    adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
                     adapter.notifyDataSetChanged();
                     room_list.setAdapter(adapter);
                 }
