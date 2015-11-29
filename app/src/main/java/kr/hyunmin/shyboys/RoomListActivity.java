@@ -2,6 +2,7 @@ package kr.hyunmin.shyboys;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -17,8 +19,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class RoomListActivity extends Actionbar {
+public class RoomListActivity extends Actionbar implements AdapterView.OnItemClickListener{
     Context context = this;
+
 
     //HOST
     EditText h_roomcode;
@@ -100,6 +103,7 @@ public class RoomListActivity extends Actionbar {
             }
         });
 
+        room_list.setOnItemClickListener(this);
     }
 
     public void Create_DB(int a){
@@ -221,4 +225,11 @@ public class RoomListActivity extends Actionbar {
         ad.show();//보여줌!
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+        String c_list = rooms.get(i);
+        Intent intent = new Intent(RoomListActivity.this,SelectQnAActivity.class);
+        intent.putExtra("arr_text",c_list);
+        startActivity(intent);
+    }
 }
