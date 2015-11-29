@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
+
 public class SelectQnAActivity extends Actionbar {
 
     Button go_to_q, go_to_a;
@@ -24,9 +26,9 @@ public class SelectQnAActivity extends Actionbar {
         go_to_q.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(SelectQnAActivity.this,QuestionActivity.class);
-                intent1.putExtra("subject",subject);
-                startActivity(intent1);
+                DAO dao = new DAO(SelectQnAActivity.this);
+                DTO[] dto_array = null;
+                dto_array = dao.import_content(subject);
             }
         });
 

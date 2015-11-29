@@ -21,15 +21,12 @@ public class QuestionActivity extends Actionbar {
     public static String[] content_Question;
     EditText question_content;
     Button insert_q_button;
-<<<<<<< HEAD
     ListView question_listView;
     ArrayAdapter adapter_question;
 
     public static boolean endOfThread = false;
-=======
-    String subject;
 
->>>>>>> 4a0ac2a6907f69f342863afd492b7a19edb20e35
+    String subject;
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +49,6 @@ public class QuestionActivity extends Actionbar {
             }
         });
            question_listView = (ListView) findViewById(R.id.question_listView);
-           Intent intent = getIntent();
            String[] result_array = (String[]) intent.getSerializableExtra("result");
 
            Vector<String> question = new Vector();

@@ -3,6 +3,7 @@ package kr.hyunmin.shyboys;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -10,25 +11,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 
-<<<<<<< HEAD
-public class MainActivity extends AppCompatActivity {
-    Button start_button;
-    Button join_Button;
+import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
+
+
+public class MainActivity extends AppCompatActivity{
 
     DAO dao;
     EditText join_id;
     EditText join_pw;
     EditText login_id;
     EditText login_pw;
-=======
-public class MainActivity extends AppCompatActivity{
+
     Button start_button;//진행하기 버튼
     Button join_Button;//참여하기 버튼
->>>>>>> 4a0ac2a6907f69f342863afd492b7a19edb20e35
     static int isHost=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +39,9 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {//참여하기 버튼 누르면 방목록창으로 엑티비티 넘김
                 isHost=0;
-//                Intent intent1 = new Intent(context,QuestionActivity.class);
-//                intent1.putExtra("result",content_Question);
-//                context.startActivity(intent1);
-//                DAO dao = new DAO(MainActivity.this);
-//                DTO[] dto_array = null;
-//                dto_array = dao.import_content();
+                Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
+                startActivity(intent1);
+
             }
         });
         start_button.setOnClickListener(new View.OnClickListener() {

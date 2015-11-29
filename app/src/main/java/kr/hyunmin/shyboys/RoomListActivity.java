@@ -1,6 +1,5 @@
 package kr.hyunmin.shyboys;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -236,8 +235,9 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
         String c_list = rooms.get(i);
 
         Intent intent = new Intent(RoomListActivity.this,SelectQnAActivity.class);
-        intent.putExtra("subject",c_list);
+        intent.putExtra("roomcode",c_list);
         startActivity(intent);
+
 
     }
 

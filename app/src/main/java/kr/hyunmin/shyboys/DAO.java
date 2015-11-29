@@ -31,6 +31,7 @@ import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 
 public class DAO extends AppCompatActivity {
     String content_Question[];
+    String subject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,7 +171,8 @@ public class DAO extends AppCompatActivity {
     }
 
     /**내용 가져오기 부분**/
-    public DTO[] import_content(){
+    public DTO[] import_content(String subject){
+        this.subject = subject;
         import_contentToDatabase();
         return dto_array;
     }
@@ -229,6 +231,7 @@ public class DAO extends AppCompatActivity {
                 }
                 Intent intent1 = new Intent(context,QuestionActivity.class);
                 intent1.putExtra("result",content_Question);
+                intent1.putExtra("subject",subject);
                 context.startActivity(intent1);
 
                 loading.dismiss();

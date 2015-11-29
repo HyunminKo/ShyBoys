@@ -18,18 +18,14 @@ import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 public class AnswerActivity extends Actionbar {
 
     Button insert_a_button;
-<<<<<<< HEAD
     EditText answer_content;
     ListView answer_listView;
     ArrayAdapter adapter_answer;
     public static boolean endOfThread = false;
-     @Override
-=======
     String subject;
 
 
     @Override
->>>>>>> 4a0ac2a6907f69f342863afd492b7a19edb20e35
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
@@ -54,7 +50,7 @@ public class AnswerActivity extends Actionbar {
          answer_listView = (ListView) findViewById(R.id.answer_listView);
          DAO dao = new DAO(AnswerActivity.this);
          DTO[] dto_array;
-         dto_array = dao.import_content();
+         dto_array = dao.import_content(subject);
 
 //         String[] content_Answer = new String[dto_array.length];
 //         for(int i = 0 ; i < dto_array.length;i++){
