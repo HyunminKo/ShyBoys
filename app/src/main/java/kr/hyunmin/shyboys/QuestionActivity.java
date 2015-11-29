@@ -2,6 +2,7 @@ package kr.hyunmin.shyboys;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,6 +18,8 @@ import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 public class QuestionActivity extends Actionbar {
     EditText question_content;
     Button insert_q_button;
+    String subject;
+
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,9 @@ public class QuestionActivity extends Actionbar {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setActionbar("객체지향설계");
+           Intent intent = getIntent();
+           subject = intent.getExtras().getString("subject");
+           setActionbar(subject);
 
         insert_q_button = (Button) findViewById(R.id.insert_q_button);
         if(MainActivity.isHost == 1)

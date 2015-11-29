@@ -94,13 +94,10 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
             public void onClick(View view) {
                 if (MainActivity.isHost == 1) {
                     showHostRoomPopup();
-<<<<<<< HEAD
                     Log.d("checkFLG", "DB 데이터 삽입");
                     adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
                     adapter.notifyDataSetChanged();
                     room_list.setAdapter(adapter);
-=======
->>>>>>> a811aec5a80ce6bde6479ad13f24adfca127a3cb
                 } else {
                     showUserRoomPopup();
                 }
@@ -170,7 +167,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 h_cursor = host_DB.rawQuery("SELECT * FROM ROOM", null);
                 h_cursor.moveToFirst();
                 while (!h_cursor.isAfterLast()) {
-                    rooms.add(h_cursor.getString(0));
+                    rooms.add(h_cursor.getString(1));
                     h_cursor.moveToNext();
                 }
                 h_cursor.close();
@@ -220,7 +217,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
                 u_cursor.moveToFirst();
                 while (!u_cursor.isAfterLast()) {
-                    rooms.add(u_cursor.getString(0));
+                    rooms.add(u_cursor.getString(1));
                     u_cursor.moveToNext();
                 }
                 u_cursor.close();
@@ -239,8 +236,9 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
         String c_list = rooms.get(i);
 
         Intent intent = new Intent(RoomListActivity.this,SelectQnAActivity.class);
-        intent.putExtra("arr_text", c_list);
+        intent.putExtra("subject",c_list);
         startActivity(intent);
+
     }
 
 }
