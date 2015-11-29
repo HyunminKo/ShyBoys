@@ -13,15 +13,19 @@ import android.widget.Button;
 public class AnswerActivity extends Actionbar {
 
     Button insert_a_button;
+    String subject;
 
-     @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setActionbar("객체지향설계");
+        Intent intent = getIntent();
+        subject = intent.getExtras().getString("subject");
+        setActionbar(subject);
 
         insert_a_button = (Button) findViewById(R.id.insert_a_button);
         if(MainActivity.isHost == 0)
