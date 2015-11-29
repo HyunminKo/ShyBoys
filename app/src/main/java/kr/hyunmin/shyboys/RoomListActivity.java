@@ -53,35 +53,46 @@ public class RoomListActivity extends Actionbar {
         rooms = new ArrayList<String>();
         room_list = (ListView)findViewById(R.id.listView2);
 
-         /*if(MainActivity.isHost==1){
+        if(MainActivity.isHost==1){
+            Create_DB(1); //host db 생성
+            host_DB = context.openOrCreateDatabase(h_DBname, Context.MODE_PRIVATE, null);
             h_cursor = host_DB.rawQuery("SELECT * FROM ROOM", null);
             h_cursor.moveToFirst();
             while (!h_cursor.isAfterLast()) {
                 rooms.add(h_cursor.getString(0));
-                Log.d("rooms배열값 : ", rooms.toString());
                 h_cursor.moveToNext();
             }
-            adapter.notifyDataSetChanged();
             h_cursor.close();
-        }*/
+            adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
+            adapter.notifyDataSetChanged();
+            room_list.setAdapter(adapter);
+        }
+
+        else {
+            Create_DB(0); //user db 생성
+
+            user_DB = context.openOrCreateDatabase(u_DBname, Context.MODE_PRIVATE, null);
+            u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
+            u_cursor.moveToFirst();
+            while (!u_cursor.isAfterLast()) {
+                rooms.add(u_cursor.getString(0));
+                u_cursor.moveToNext();
+            }
+            u_cursor.close();
+            adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
+            room_list.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
+
 
         ImageButton imageButton = (ImageButton) r_Customview.findViewById(R.id.plus_button);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (MainActivity.isHost == 1) {
-                    Create_DB(1);
-                    Log.d("checkFLG", "DB생성 완료2");
                     showHostRoomPopup();
-                    Log.d("checkFLG", "DB 데이터 삽입");
-                    adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font , rooms);
-                    adapter.notifyDataSetChanged();
-                    room_list.setAdapter(adapter);
                 } else {
-                    Log.d("checkUserFLAG", "DB준비");
-                    Create_DB(0);
                     showUserRoomPopup();
-                    Log.d("checkFLG", "DB 데이터 삽입");
                     adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
                     adapter.notifyDataSetChanged();
                     room_list.setAdapter(adapter);
@@ -116,7 +127,6 @@ public class RoomListActivity extends Actionbar {
     }
 
     public void showHostRoomPopup(){
-        Log.d("checkFLG", "HOST POPUP 창");
         Context mContext = getApplicationContext();
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 
@@ -139,7 +149,7 @@ public class RoomListActivity extends Actionbar {
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Log.d("checkValue", h_roomcode.getText().toString());
-                Log.d("checkValue",subject.getText().toString());
+                Log.d("checkValue", subject.getText().toString());
                 Log.d("checkValue", h_name.getText().toString());
 
                 host_DB.execSQL("INSERT INTO " + tablename + "(h_roomcode, subject, h_name) VALUES"
@@ -154,8 +164,10 @@ public class RoomListActivity extends Actionbar {
                     Log.d("rooms배열값 : ", rooms.toString());
                     h_cursor.moveToNext();
                 }
-                adapter.notifyDataSetChanged();
                 h_cursor.close();
+                adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
+                adapter.notifyDataSetChanged();
+                room_list.setAdapter(adapter);
             }
         });
         //팝업창 생성
@@ -186,13 +198,6 @@ public class RoomListActivity extends Actionbar {
                 Log.d("checkValue", u_roomcode.getText().toString());
                 Log.d("checkValue", u_name.getText().toString());
 
-                /*
-                if(u_roomcode.getText().toString().equals("abc012")) {//룸코드 비교후
-                    //해당하는 과목 불러오기
-                    u_subject = null;
-                }
-                */
-
                 user_DB.execSQL("INSERT INTO " + tablename + "(u_roomcode, u_subject, u_name, QorA, in_content, in_date) VALUES"
                         + "('" + u_roomcode.getText().toString()
                         + "','" + null
@@ -201,12 +206,12 @@ public class RoomListActivity extends Actionbar {
                         + "','" + null
                         + "','" + null + "')");
 
-                u_cursor = null;
                 u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
-
-                while (u_cursor.moveToNext()) {
+                u_cursor.moveToFirst();
+                while (!u_cursor.isAfterLast()) {
                     rooms.add(u_cursor.getString(0));
-                    Log.d("rooms배열값 : ", rooms.toString());
+                    Log.d("rooms배열값12 : ", rooms.toString());
+                    u_cursor.moveToNext();
                 }
                 u_cursor.close();
             }
