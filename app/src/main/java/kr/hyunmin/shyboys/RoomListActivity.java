@@ -73,7 +73,6 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
 
         else {
             Create_DB(0); //user db 생성
-
             user_DB = context.openOrCreateDatabase(u_DBname, Context.MODE_PRIVATE, null);
             u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
             u_cursor.moveToFirst();
@@ -96,9 +95,6 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                     showHostRoomPopup();
                 } else {
                     showUserRoomPopup();
-                    adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
-                    adapter.notifyDataSetChanged();
-                    room_list.setAdapter(adapter);
                 }
             }
         });
@@ -165,7 +161,6 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 h_cursor.moveToFirst();
                 while (!h_cursor.isAfterLast()) {
                     rooms.add(h_cursor.getString(0));
-                    Log.d("rooms배열값 : ", rooms.toString());
                     h_cursor.moveToNext();
                 }
                 h_cursor.close();
@@ -214,10 +209,12 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 u_cursor.moveToFirst();
                 while (!u_cursor.isAfterLast()) {
                     rooms.add(u_cursor.getString(0));
-                    Log.d("rooms배열값12 : ", rooms.toString());
                     u_cursor.moveToNext();
                 }
                 u_cursor.close();
+                adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
+                adapter.notifyDataSetChanged();
+                room_list.setAdapter(adapter);
             }
         });
         //팝업창 생성
