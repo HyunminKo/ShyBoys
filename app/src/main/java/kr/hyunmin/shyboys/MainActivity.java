@@ -3,7 +3,6 @@ package kr.hyunmin.shyboys;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -13,9 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import kr.hyunmin.shyboys.kr.hyunmin.object.DAO;
 
 public class MainActivity extends AppCompatActivity {
     Button start_button;
@@ -27,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
     EditText login_id;
     EditText login_pw;
     static int isHost=0;
-
-    Toast mToast = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +34,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isHost=0;
-                Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
-                startActivity(intent1);
+//                Intent intent1 = new Intent(context,QuestionActivity.class);
+//                intent1.putExtra("result",content_Question);
+//                context.startActivity(intent1);
+//                DAO dao = new DAO(MainActivity.this);
+//                DTO[] dto_array = null;
+//                dto_array = dao.import_content();
             }
         });
         start_button.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         });
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                dao.insert_join(join_id.getText().toString(),join_pw.getText().toString());
+                dao.insert_join(join_id.getText().toString(), join_pw.getText().toString());
 
             }
         });
