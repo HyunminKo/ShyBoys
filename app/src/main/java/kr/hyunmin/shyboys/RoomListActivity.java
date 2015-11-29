@@ -1,5 +1,6 @@
 package kr.hyunmin.shyboys;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -77,7 +78,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                     Log.d("checkFLG", "DB생성 완료2");
                     showHostRoomPopup();
                     Log.d("checkFLG", "DB 데이터 삽입");
-                    adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font , rooms);
+                    adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
                     adapter.notifyDataSetChanged();
                     room_list.setAdapter(adapter);
                 } else {
@@ -92,8 +93,10 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
             }
         });
 
+
         room_list.setOnItemClickListener(this);
     }
+
 
     public void Create_DB(int a){
         Log.d("checkFLG", "DB생성 메소드");
@@ -224,7 +227,8 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         String c_list = rooms.get(i);
         Intent intent = new Intent(RoomListActivity.this,SelectQnAActivity.class);
-        intent.putExtra("arr_text",c_list);
+        intent.putExtra("arr_text", c_list);
         startActivity(intent);
     }
+
 }
