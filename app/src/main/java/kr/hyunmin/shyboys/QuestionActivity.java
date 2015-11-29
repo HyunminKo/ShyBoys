@@ -4,15 +4,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import kr.hyunmin.shyboys.kr.hyunmin.object.DAO;
-import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 
 public class QuestionActivity extends Actionbar {
     EditText question_content;
@@ -61,17 +57,17 @@ public class QuestionActivity extends Actionbar {
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String content = question_content.getText().toString();
-                DAO dao = new DAO();
-                DTO dto = new DTO();
-
-                dto.set_content(content);
-                dto.set_room_code("Room123");
-                dto.set_QorA("Q");
-                dto.set_date("2015/11/27");
-                if(dao.addDB(dto)){
-                    Log.d("checkValue","성공");
-                }else
-                    Log.d("checkValue","실패");
+//                DAO dao = new DAO();
+//                DTO dto = new DTO();
+//
+//                dto.set_content(content);
+//                dto.set_room_code("Room123");
+//                dto.set_QorA("Q");
+//                dto.set_date("2015/11/27");
+//                if(dao.addDB(dto)){
+//                    Log.d("checkValue","성공");
+//                }else
+//                    Log.d("checkValue","실패");
 
             }
         });
