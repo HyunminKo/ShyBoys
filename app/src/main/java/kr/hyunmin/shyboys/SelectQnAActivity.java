@@ -11,7 +11,7 @@ public class SelectQnAActivity extends Actionbar {
 
     Button go_to_q, go_to_a;
     String subject;
-
+    String roomcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +20,7 @@ public class SelectQnAActivity extends Actionbar {
 
         Intent intent = getIntent();
         subject = intent.getExtras().getString("subject");
+        roomcode = intent.getExtras().getString("roomcode");
         setActionbar(subject);
 
         go_to_q = (Button) findViewById(R.id.question_list_Button);
@@ -28,7 +29,7 @@ public class SelectQnAActivity extends Actionbar {
             public void onClick(View view) {
                 DAO dao = new DAO(SelectQnAActivity.this);
                 DTO[] dto_array = null;
-                dto_array = dao.import_content(subject);
+                dto_array = dao.import_content(subject,roomcode,"Q");
             }
         });
 
@@ -36,9 +37,9 @@ public class SelectQnAActivity extends Actionbar {
         go_to_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(SelectQnAActivity.this,AnswerActivity.class);
-                intent1.putExtra("subject",subject);
-                startActivity(intent1);
+                DAO dao = new DAO(SelectQnAActivity.this);
+                DTO[] dto_array = null;
+                dto_array = dao.import_content(subject,roomcode,"A");
             }
         });
     }

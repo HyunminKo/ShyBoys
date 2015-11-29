@@ -32,6 +32,10 @@ import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 public class DAO extends AppCompatActivity {
     String content_Question[];
     String subject;
+    String roomcode;
+    private String[] content_Answer;
+    private String QnA;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,8 +175,10 @@ public class DAO extends AppCompatActivity {
     }
 
     /**내용 가져오기 부분**/
-    public DTO[] import_content(String subject){
+    public DTO[] import_content(String subject,String roomcode,String QnA){
         this.subject = subject;
+        this.roomcode = roomcode;
+        this.QnA =QnA;
         import_contentToDatabase();
         return dto_array;
     }
@@ -225,14 +231,26 @@ public class DAO extends AppCompatActivity {
                 }
 
                 content_Question = new String[dto_array.length];
+                content_Answer = new String[dto_array.length];
                 for(int i = 0 ; i < dto_array.length;i++){
-                    if(dto_array[i].get_QorA().equals("Q"))
+                    if(dto_array[i].get_QorA().equals("Q") && dto_array[i].get_room_code().equals(roomcode))
                         content_Question[i] = dto_array[i].get_content();
+                    if(dto_array[i].get_QorA().equals("A") && dto_array[i].get_room_code().equals(roomcode))
+                        content_Answer[i] = dto_array[i].get_content();
                 }
-                Intent intent1 = new Intent(context,QuestionActivity.class);
-                intent1.putExtra("result",content_Question);
-                intent1.putExtra("subject",subject);
-                context.startActivity(intent1);
+                if(QnA.equals("Q")){
+                    Intent intent1 = new Intent(context,QuestionActivity.class);
+                    intent1.putExtra("result",content_Question);
+                    intent1.putExtra("subject",subject);
+                    intent1.putExtra("roomcode",roomcode);
+                    context.startActivity(intent1);
+                }else{
+                    Intent intent1 = new Intent(context,AnswerActivity.class);
+                    intent1.putExtra("result",content_Answer);
+                    intent1.putExtra("subject",subject);
+                    intent1.putExtra("roomcode",roomcode);
+                    context.startActivity(intent1);
+                }
 
                 loading.dismiss();
             }

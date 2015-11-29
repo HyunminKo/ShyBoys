@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.util.Vector;
+
 import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 
 public class AnswerActivity extends Actionbar {
@@ -21,8 +23,9 @@ public class AnswerActivity extends Actionbar {
     EditText answer_content;
     ListView answer_listView;
     ArrayAdapter adapter_answer;
-    public static boolean endOfThread = false;
     String subject;
+    String roomcode;
+
 
 
     @Override
@@ -34,6 +37,7 @@ public class AnswerActivity extends Actionbar {
 
         Intent intent = getIntent();
         subject = intent.getExtras().getString("subject");
+        roomcode = intent.getExtras().getString("roomcode");
         setActionbar(subject);
 
         insert_a_button = (Button) findViewById(R.id.insert_a_button);
@@ -43,24 +47,20 @@ public class AnswerActivity extends Actionbar {
             @Override
             public void onClick(View view) {
                 showAnswer_writePopup();
-                Intent intent1 = new Intent(AnswerActivity.this,RoomListActivity.class);
-                startActivity(intent1);
             }
         });
          answer_listView = (ListView) findViewById(R.id.answer_listView);
-         DAO dao = new DAO(AnswerActivity.this);
-         DTO[] dto_array;
-         dto_array = dao.import_content(subject);
+        String[] result_array = (String[]) intent.getSerializableExtra("result");
 
-//         String[] content_Answer = new String[dto_array.length];
-//         for(int i = 0 ; i < dto_array.length;i++){
-//             if(dto_array[i].get_QorA().equals("A"))
-//                 content_Answer[i] = dto_array[i].get_content();
-//         }
-//
-//         adapter_answer = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, content_Answer);
-//         answer_listView.setAdapter(adapter_answer);
-//         adapter_answer.notifyDataSetChanged();
+        Vector<String> Answer = new Vector();
+        for(int i=0;i<result_array.length;i++){
+            if(result_array[i]!=null){
+                Answer.add((String) result_array[i]);
+            }
+        }
+        adapter_answer = new ArrayAdapter(this,R.layout.list_font,Answer);
+        answer_listView.setAdapter(adapter_answer);
+        adapter_answer.notifyDataSetChanged();
 
      }
     public void showAnswer_writePopup(){
@@ -89,9 +89,9 @@ public class AnswerActivity extends Actionbar {
                 DTO dto = new DTO();
 
                 dto.set_content(content);
-                dto.set_room_code("Room123");
+                dto.set_room_code(roomcode);
                 dto.set_QorA("A");
-                dto.set_date("11/29");
+                dto.set_date("11/30");
                 dao.insert_QuestionAndAnswer(dto);
 
             }

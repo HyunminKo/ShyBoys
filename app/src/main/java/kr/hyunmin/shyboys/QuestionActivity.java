@@ -23,10 +23,8 @@ public class QuestionActivity extends Actionbar {
     Button insert_q_button;
     ListView question_listView;
     ArrayAdapter adapter_question;
-
-    public static boolean endOfThread = false;
-
     String subject;
+    String roomcode;
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class QuestionActivity extends Actionbar {
 
            Intent intent = getIntent();
            subject = intent.getExtras().getString("subject");
+           roomcode = intent.getExtras().getString("roomcode");
            setActionbar(subject);
 
         insert_q_button = (Button) findViewById(R.id.insert_q_button);
@@ -91,9 +90,9 @@ public class QuestionActivity extends Actionbar {
                 DTO dto = new DTO();
 
                 dto.set_content(content);
-                dto.set_room_code("Room123");
-                dto.set_QorA("A");
-                dto.set_date("11/29");
+                dto.set_room_code(roomcode);
+                dto.set_QorA("Q");
+                dto.set_date("11/30");
                 dao.insert_QuestionAndAnswer(dto);
 
             }
