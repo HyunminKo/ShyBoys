@@ -1,6 +1,5 @@
 package kr.hyunmin.shyboys;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -96,13 +95,19 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
             public void onClick(View view) {
                 if (MainActivity.isHost == 1) {
                     showHostRoomPopup();
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0ac97e75f6557c6b6a7a1f6caf0a4580730c3c07
                     Log.d("checkFLG", "DB 데이터 삽입");
                     adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.list_font, rooms);
                     adapter.notifyDataSetChanged();
                     room_list.setAdapter(adapter);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0ac97e75f6557c6b6a7a1f6caf0a4580730c3c07
                 } else {
                     showUserRoomPopup();
                 }
@@ -185,7 +190,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 h_cursor = host_DB.rawQuery("SELECT * FROM ROOM", null);
                 h_cursor.moveToFirst();
                 while (!h_cursor.isAfterLast()) {
-                    rooms.add(h_cursor.getString(0));
+                    rooms.add(h_cursor.getString(1));
                     h_cursor.moveToNext();
                 }
                 h_cursor.close();
@@ -211,6 +216,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
         aDialog.setView(layout); //inti.xml 파일을 뷰로 셋팅
         aDialog.setCancelable(true);
         u_roomcode = (EditText) layout.findViewById(R.id.u_Roomcode_edittext);
+        subject = (EditText) layout.findViewById(R.id.Subject_edittext);
         u_name = (EditText) layout.findViewById(R.id.u_Name_edittext);
         //그냥 닫기버튼을 위한 부분
         aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
@@ -221,11 +227,12 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Log.d("checkValue", u_roomcode.getText().toString());
+                Log.d("checkValue", subject.getText().toString());
                 Log.d("checkValue", u_name.getText().toString());
 
                 user_DB.execSQL("INSERT INTO " + tablename + "(u_roomcode, u_subject, u_name, QorA, in_content, in_date) VALUES"
                         + "('" + u_roomcode.getText().toString()
-                        + "','" + null
+                        + "','" + subject.getText().toString()
                         + "','" + u_name.getText().toString()
                         + "','" + null
                         + "','" + null
@@ -234,7 +241,7 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
                 u_cursor = user_DB.rawQuery("SELECT * FROM ROOM", null);
                 u_cursor.moveToFirst();
                 while (!u_cursor.isAfterLast()) {
-                    rooms.add(u_cursor.getString(0));
+                    rooms.add(u_cursor.getString(1));
                     u_cursor.moveToNext();
                 }
                 u_cursor.close();
@@ -251,9 +258,17 @@ public class RoomListActivity extends Actionbar implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
         String c_list = rooms.get(i);
+<<<<<<< HEAD
         Intent intent = new Intent(RoomListActivity.this, SelectQnAActivity.class);
         intent.putExtra("arr_text", c_list);
+=======
+
+        Intent intent = new Intent(RoomListActivity.this,SelectQnAActivity.class);
+        intent.putExtra("roomcode",c_list);
+>>>>>>> 0ac97e75f6557c6b6a7a1f6caf0a4580730c3c07
         startActivity(intent);
+
+
     }
 
 

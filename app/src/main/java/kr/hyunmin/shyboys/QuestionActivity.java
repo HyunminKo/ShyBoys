@@ -2,21 +2,31 @@ package kr.hyunmin.shyboys;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
-import kr.hyunmin.shyboys.kr.hyunmin.object.DAO;
+import java.util.Vector;
+
 import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 
 public class QuestionActivity extends Actionbar {
+    public static String[] content_Question;
     EditText question_content;
     Button insert_q_button;
+    ListView question_listView;
+    ArrayAdapter adapter_question;
+
+    public static boolean endOfThread = false;
+
+    String subject;
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +35,9 @@ public class QuestionActivity extends Actionbar {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setActionbar("객체지향설계");
+           Intent intent = getIntent();
+           subject = intent.getExtras().getString("subject");
+           setActionbar(subject);
 
         insert_q_button = (Button) findViewById(R.id.insert_q_button);
         if(MainActivity.isHost == 1)
@@ -36,6 +48,20 @@ public class QuestionActivity extends Actionbar {
                 showQuestion_writePopup();
             }
         });
+           question_listView = (ListView) findViewById(R.id.question_listView);
+           String[] result_array = (String[]) intent.getSerializableExtra("result");
+
+           Vector<String> question = new Vector();
+           for(int i=0;i<result_array.length;i++){
+               if(result_array[i]!=null){
+                       question.add((String)result_array[i]);
+               }
+           }
+           adapter_question = new ArrayAdapter(this,R.layout.list_font,question);
+           question_listView.setAdapter(adapter_question);
+           adapter_question.notifyDataSetChanged();
+
+
 
     }
 
@@ -61,17 +87,14 @@ public class QuestionActivity extends Actionbar {
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 String content = question_content.getText().toString();
-                DAO dao = new DAO();
+                DAO dao = new DAO(QuestionActivity.this);
                 DTO dto = new DTO();
 
                 dto.set_content(content);
                 dto.set_room_code("Room123");
-                dto.set_QorA("Q");
-                dto.set_date("2015/11/27");
-                if(dao.addDB(dto)){
-                    Log.d("checkValue","성공");
-                }else
-                    Log.d("checkValue","실패");
+                dto.set_QorA("A");
+                dto.set_date("11/29");
+                dao.insert_QuestionAndAnswer(dto);
 
             }
         });

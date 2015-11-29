@@ -58,4 +58,24 @@ public class DTO {
     public void set_date(String _date) {
         this._date = _date;
     }
+
+    public DTO(String _room_code, String _QorA, String _content, String _date) {
+        this._room_code = _room_code;
+        this._QorA = _QorA;
+        this._content = _content;
+        this._date = _date;
+    }
+
+    public DTO() {
+    }
+
+    @Override
+    public String toString() {
+        return "DTO{" +
+                "_room_code='" + _room_code + '\'' +
+                ", _QorA='" + _QorA + '\'' +
+                ", _content='" + _content + '\'' +
+                ", _date='" + _date + '\'' +
+                '}';
+    }
 }

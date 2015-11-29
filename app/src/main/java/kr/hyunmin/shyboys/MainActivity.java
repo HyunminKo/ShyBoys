@@ -11,10 +11,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
+
+import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
+
 
 public class MainActivity extends AppCompatActivity{
+
+    DAO dao;
+    EditText join_id;
+    EditText join_pw;
+    EditText login_id;
+    EditText login_pw;
+
     Button start_button;//진행하기 버튼
     Button join_Button;//참여하기 버튼
     static int isHost=0;
@@ -31,12 +41,13 @@ public class MainActivity extends AppCompatActivity{
                 isHost=0;
                 Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
                 startActivity(intent1);
+
             }
         });
         start_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isHost=1;
+                isHost = 1;
                 showLoginPopup();
             }
         });
@@ -65,6 +76,7 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
     public void showLoginPopup(){
+        dao = new DAO(MainActivity.this);
         Context mContext = getApplicationContext();
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 
@@ -76,6 +88,8 @@ public class MainActivity extends AppCompatActivity{
         aDialog.setView(layout); //inti.xml 파일을 뷰로 셋팅
         aDialog.setCancelable(true);
         //그냥 닫기버튼을 위한 부분
+        login_id = (EditText) layout.findViewById(R.id.Login_id_edittext);
+        login_pw = (EditText) layout.findViewById(R.id.Login_pw_edittext);
         aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             }
@@ -87,9 +101,7 @@ public class MainActivity extends AppCompatActivity{
         });
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-
-                Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
-                startActivity(intent1);
+                dao.login(login_id.getText().toString(),login_pw.getText().toString());
             }
         });
         //팝업창 생성
@@ -97,6 +109,7 @@ public class MainActivity extends AppCompatActivity{
         ad.show();//보여줌!
     }
     public void showJoinPopup(){
+        dao = new DAO(MainActivity.this);
         Context mContext = getApplicationContext();
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 
@@ -107,6 +120,8 @@ public class MainActivity extends AppCompatActivity{
         aDialog.setTitle("Join"); //타이틀바 제목
         aDialog.setView(layout); //inti.xml 파일을 뷰로 셋팅
         aDialog.setCancelable(true);
+        join_id = (EditText) layout.findViewById(R.id.Join_id_edittext);
+        join_pw = (EditText) layout.findViewById(R.id.Join_pw_edittext);
         //그냥 닫기버튼을 위한 부분
         aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -115,8 +130,8 @@ public class MainActivity extends AppCompatActivity{
         });
         aDialog.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent1 = new Intent(MainActivity.this,RoomListActivity.class);
-                startActivity(intent1);
+                dao.insert_join(join_id.getText().toString(), join_pw.getText().toString());
+
             }
         });
         //팝업창 생성
