@@ -21,10 +21,15 @@ public class QuestionActivity extends Actionbar {
     public static String[] content_Question;
     EditText question_content;
     Button insert_q_button;
+<<<<<<< HEAD
     ListView question_listView;
     ArrayAdapter adapter_question;
 
     public static boolean endOfThread = false;
+=======
+    String subject;
+
+>>>>>>> 4a0ac2a6907f69f342863afd492b7a19edb20e35
 
        @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,9 @@ public class QuestionActivity extends Actionbar {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setActionbar("객체지향설계");
+           Intent intent = getIntent();
+           subject = intent.getExtras().getString("subject");
+           setActionbar(subject);
 
         insert_q_button = (Button) findViewById(R.id.insert_q_button);
         if(MainActivity.isHost == 1)

@@ -18,18 +18,27 @@ import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
 public class AnswerActivity extends Actionbar {
 
     Button insert_a_button;
+<<<<<<< HEAD
     EditText answer_content;
     ListView answer_listView;
     ArrayAdapter adapter_answer;
     public static boolean endOfThread = false;
      @Override
+=======
+    String subject;
+
+
+    @Override
+>>>>>>> 4a0ac2a6907f69f342863afd492b7a19edb20e35
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setActionbar("객체지향설계");
+        Intent intent = getIntent();
+        subject = intent.getExtras().getString("subject");
+        setActionbar(subject);
 
         insert_a_button = (Button) findViewById(R.id.insert_a_button);
         if(MainActivity.isHost == 0)
