@@ -35,6 +35,7 @@ public class DAO extends AppCompatActivity {
     String roomcode;
     private String[] content_Answer;
     private String QnA;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,10 +176,11 @@ public class DAO extends AppCompatActivity {
     }
 
     /**내용 가져오기 부분**/
-    public DTO[] import_content(String subject,String roomcode,String QnA){
+    public DTO[] import_content(String subject,String roomcode,String name,String QnA){
         this.subject = subject;
         this.roomcode = roomcode;
         this.QnA =QnA;
+        this.name = name;
         import_contentToDatabase();
         return dto_array;
     }
@@ -243,6 +245,7 @@ public class DAO extends AppCompatActivity {
                     intent1.putExtra("result",content_Question);
                     intent1.putExtra("subject",subject);
                     intent1.putExtra("roomcode",roomcode);
+                    intent1.putExtra("name",name);
                     context.startActivity(intent1);
                 }else{
                     Intent intent1 = new Intent(context,AnswerActivity.class);

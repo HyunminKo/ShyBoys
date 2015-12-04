@@ -27,6 +27,7 @@ public class QuestionActivity extends Actionbar {
     ArrayAdapter adapter_question;
     String subject;
     String roomcode;
+    String name;
     Vector<String> question;
 
        @Override
@@ -39,6 +40,7 @@ public class QuestionActivity extends Actionbar {
            Intent intent = getIntent();
            subject = intent.getExtras().getString("subject");
            roomcode = intent.getExtras().getString("roomcode");
+           name = intent.getExtras().getString("name");
            setActionbar(subject);
 
         insert_q_button = (Button) findViewById(R.id.insert_q_button);
@@ -95,12 +97,12 @@ public class QuestionActivity extends Actionbar {
 
                 Date d = new Date();
                 SimpleDateFormat now_date = new SimpleDateFormat("yyyy-MM-dd");
-                dto.set_content(content +"\n"+now_date.format(d));
+                dto.set_content(content +"\n"+now_date.format(d)+"\t"+name);
                 dto.set_room_code(roomcode);
                 dto.set_QorA("Q");
                 dto.set_date(now_date+"");
                 dao.insert_QuestionAndAnswer(dto);
-                question.add(content +"\n"+now_date.format(d));
+                question.add(content +"\n"+now_date.format(d)+"\t"+name);
                 adapter_question.notifyDataSetChanged();
             }
         });

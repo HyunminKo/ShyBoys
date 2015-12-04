@@ -14,8 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import kr.hyunmin.shyboys.kr.hyunmin.object.DTO;
-
 
 public class MainActivity extends AppCompatActivity{
 
