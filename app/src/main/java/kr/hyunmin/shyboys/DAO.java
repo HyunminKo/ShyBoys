@@ -172,7 +172,7 @@ public class DAO extends AppCompatActivity {
         }
 
         ImportData task = new ImportData();
-        task.execute("http://52.68.201.69/login.php");
+        task.execute("http://52.193.10.142/login.php");
     }
 
     /**내용 가져오기 부분**/
@@ -289,7 +289,7 @@ public class DAO extends AppCompatActivity {
         }
 
         ImportData task = new ImportData();
-        task.execute("http://52.68.201.69/import_content.php");
+        task.execute("http://52.193.10.142/import_content.php");
 
     }
 
@@ -324,7 +324,7 @@ public class DAO extends AppCompatActivity {
                     String id = (String)params[0];
                     String pw = (String)params[1];
 
-                    String link="http://52.68.201.69/join.php";
+                    String link="http://52.193.10.142/join.php";
                     String data  = URLEncoder.encode("ID", "UTF-8") + "=" + URLEncoder.encode(id, "UTF-8");
                     data += "&" + URLEncoder.encode("PW", "UTF-8") + "=" + URLEncoder.encode(pw, "UTF-8");
                     Log.d("test",data);
@@ -397,7 +397,7 @@ public class DAO extends AppCompatActivity {
                     String QorA = (String)params[2];
                     String date = (String)params[3];
 
-                    String link="http://52.68.201.69/insert_QuestionAndAnswer.php";
+                    String link="http://52.193.10.142/insert_QuestionAndAnswer.php";
                     String data  = URLEncoder.encode("_room_code", "UTF-8") + "=" + URLEncoder.encode(roomcode, "UTF-8");
                     data += "&" + URLEncoder.encode("_QorA", "UTF-8") + "=" + URLEncoder.encode(QorA, "UTF-8");
                     data += "&" + URLEncoder.encode("_content", "UTF-8") + "=" + URLEncoder.encode(content, "UTF-8");
